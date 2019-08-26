@@ -8,7 +8,6 @@ using genericPharmaWebAPI.Models;
 using genericPharmaWebAPI.ViewModels;
 using AutoMapper;
 using System.Data.Entity;
-using System.Web.Http.Cors;
 
 namespace genericPharmaWebAPI.Controllers
 {
