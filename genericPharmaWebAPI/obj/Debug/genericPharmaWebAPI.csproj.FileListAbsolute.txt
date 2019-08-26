@@ -1,4 +1,3 @@
-C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\obj\Debug\genericPharmaWebAPI.csprojResolveAssemblyReference.cache
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\roslyn\csc.exe
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -62,5 +61,6 @@ C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPh
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\obj\Debug\genericPharmaWebAPI.csprojResolveAssemblyReference.cache
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\obj\Debug\genericPharmaWebAPI.dll
 C:\Users\Bryan\Documents\Visual Studio 2015\Projects\GenePharmaProject\genericPharmaWebAPI\genericPharmaWebAPI\obj\Debug\genericPharmaWebAPI.pdb

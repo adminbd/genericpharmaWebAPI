@@ -13,8 +13,9 @@ namespace genericPharmaWebAPI.ViewModels
         public int Stock { get; set; }
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
-        public System.DateTime Vencimiento { get; set; }
+        public DateTime Vencimiento { get; set; }
         public int IdPaquete { get; set; }
         public int IdClasificacion { get; set; }
+        public HttpPostedFileBase FormData { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using genericPharmaWebAPI.Models;
 using genericPharmaWebAPI.ViewModels;
 using AutoMapper;
 using System.Data.Entity;
-
+using System.Web.Http.Cors;
 
 namespace genericPharmaWebAPI.Controllers
 {
@@ -63,42 +63,78 @@ namespace genericPharmaWebAPI.Controllers
             }
             catch (Exception e)
             {
-
                 Console.WriteLine(e.Message);
                 return Ok("error");
-                throw;
+                throw e;
             }
 
         }
 
         // PUT: api/Articulos/5
-        public void Put(int id, [FromBody]vmArticulo articulo)
+        public IHttpActionResult Put(int id, [FromBody]vmArticulo articulo)
         {
-            using (PharmaEntities db = new PharmaEntities())
+            try
             {
-                var edtArticulo = db.Articulo.Find(id);
-                edtArticulo.Codigo = articulo.Codigo;
-                edtArticulo.Nombre = articulo.Nombre;
-                edtArticulo.Stock = articulo.Stock;
-                edtArticulo.Descripcion = articulo.Descripcion;
-                edtArticulo.Imagen = articulo.Imagen;
-                edtArticulo.Vencimiento = articulo.Vencimiento;
-                edtArticulo.IdPaquete = articulo.IdPaquete;
-                edtArticulo.IdClasificacion = articulo.IdClasificacion;
+                using (PharmaEntities db = new PharmaEntities())
+                {
+                    var edtArticulo = db.Articulo.Find(id);
+                    if (edtArticulo != null)
+                    {
+                        edtArticulo.Codigo = articulo.Codigo;
+                        edtArticulo.Nombre = articulo.Nombre;
+                        edtArticulo.Stock = articulo.Stock;
+                        edtArticulo.Descripcion = articulo.Descripcion;
+                        edtArticulo.Imagen = articulo.Imagen;
+                        edtArticulo.Vencimiento = articulo.Vencimiento;
+                        edtArticulo.IdPaquete = articulo.IdPaquete;
+                        edtArticulo.IdClasificacion = articulo.IdClasificacion;
 
-                db.Entry(edtArticulo).State = EntityState.Modified;
-                db.SaveChanges();
+                        db.Entry(edtArticulo).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return Ok("success");
+                    }
+                    else
+                    {
+                        return Ok("incomplete");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return Ok("error");
+                throw ex;
             }
         }
 
+        [HttpDelete]
+        [HttpOptions]
         // DELETE: api/Articulos/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            using (PharmaEntities db = new PharmaEntities())
+            try
             {
-                var rmArticulo = db.Articulo.Find(id);
-                db.Articulo.Remove(rmArticulo);
-                db.SaveChanges();
+                using (PharmaEntities db = new PharmaEntities())
+                {
+                    var rmArticulo = db.Articulo.Find(id);
+                    if (rmArticulo != null)
+                    {
+                        db.Articulo.Remove(rmArticulo);
+                        db.SaveChanges();
+                        return Ok("success");
+                    }
+                    else
+                    {
+                        return Ok("incomplete");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Ok("Error");
+                throw e;
             }
         }
     }
