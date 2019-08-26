@@ -13,6 +13,10 @@
           <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
           <ScalarProperty Name="IdPaquete" ColumnName="IdPaquete" />
           <ScalarProperty Name="IdClasificacion" ColumnName="IdClasificacion" />
+          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+          <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+          <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+          <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,18 +61,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleIngreso">
-      <EntityTypeMapping TypeName="PharmaModel.DetalleIngreso">
-        <MappingFragment StoreEntitySet="DetalleIngreso">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdIngreso" ColumnName="IdIngreso" />
-          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
-          <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DetallePedido">
       <EntityTypeMapping TypeName="PharmaModel.DetallePedido">
         <MappingFragment StoreEntitySet="DetallePedido">
@@ -78,17 +70,6 @@
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
           <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
           <ScalarProperty Name="Descuento" ColumnName="Descuento" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Distribuye">
-      <EntityTypeMapping TypeName="PharmaModel.Distribuye">
-        <MappingFragment StoreEntitySet="Distribuye">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Fecha_lote" ColumnName="Fecha_lote" />
-          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -111,12 +92,11 @@
     <EntitySetMapping Name="Ingreso">
       <EntityTypeMapping TypeName="PharmaModel.Ingreso">
         <MappingFragment StoreEntitySet="Ingreso">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fecha_lote" ColumnName="Fecha_lote" />
           <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-          <ScalarProperty Name="Tipo_Comprobante" ColumnName="Tipo_Comprobante" />
-          <ScalarProperty Name="Numero_Comprobante" ColumnName="Numero_Comprobante" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -165,17 +145,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PharmaModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Tipo_Bodega">
       <EntityTypeMapping TypeName="PharmaModel.Tipo_Bodega">
         <MappingFragment StoreEntitySet="Tipo_Bodega">
@@ -204,6 +173,49 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistroArticulo">
+      <EntityTypeMapping TypeName="PharmaModel.RegistroArticulo">
+        <MappingFragment StoreEntitySet="RegistroArticulo">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistroCliente">
+      <EntityTypeMapping TypeName="PharmaModel.RegistroCliente">
+        <MappingFragment StoreEntitySet="RegistroCliente">
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistroProveedor">
+      <EntityTypeMapping TypeName="PharmaModel.RegistroProveedor">
+        <MappingFragment StoreEntitySet="RegistroProveedor">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisualizarEmpleados">
+      <EntityTypeMapping TypeName="PharmaModel.VisualizarEmpleados">
+        <MappingFragment StoreEntitySet="VisualizarEmpleados">
+          <ScalarProperty Name="NI" ColumnName="NI" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisualizarUsuario">
+      <EntityTypeMapping TypeName="PharmaModel.VisualizarUsuario">
+        <MappingFragment StoreEntitySet="VisualizarUsuario">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
         </MappingFragment>
       </EntityTypeMapping>
