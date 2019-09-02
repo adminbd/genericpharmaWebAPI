@@ -56,16 +56,18 @@
     <Property Name="activo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__IdClas__2F10007B" FromRole="Clasificacion" ToRole="Articulo" />
   </EntityType>
-  <EntityType Name="Cliente">
+  <EntityType Name="Comprador">
     <Key>
-      <PropertyRef Name="IdCliente" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Pedido" Relationship="Self.FK_Pedido_Cliente" FromRole="Cliente" ToRole="Pedido" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Nombres" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Comprador_Usuario" FromRole="Comprador" ToRole="Usuario" />
+    <NavigationProperty Name="Pedido" Relationship="Self.FK_Pedido_Comprador" FromRole="Comprador" ToRole="Pedido" />
   </EntityType>
   <EntityType Name="DetallePedido">
     <Key>
@@ -134,16 +136,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdCliente" Type="Int32" Nullable="false" />
-    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
     <Property Name="NumeroPedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Impuesto" Type="Decimal" Precision="4" Scale="2" />
     <Property Name="TotalPedido" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
     <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Cliente" Relationship="Self.FK_Pedido_Cliente" FromRole="Pedido" ToRole="Cliente" />
+    <Property Name="IdComprador" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comprador" Relationship="Self.FK_Pedido_Comprador" FromRole="Pedido" ToRole="Comprador" />
     <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Pedido" FromRole="Pedido" ToRole="DetallePedido" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK_Pedido_Usuario" FromRole="Pedido" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Proveedor">
     <Key>
@@ -190,8 +190,8 @@
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Contrasena" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Comprador" Relationship="Self.FK_Comprador_Usuario" FromRole="Usuario" ToRole="Comprador" />
     <NavigationProperty Name="Empleado" Relationship="Self.FK__Empleado__IdUsua__36B12243" FromRole="Usuario" ToRole="Empleado" />
-    <NavigationProperty Name="Pedido" Relationship="Self.FK_Pedido_Usuario" FromRole="Usuario" ToRole="Pedido" />
   </EntityType>
   <EntityType Name="RegistroArticulo">
     <Key>
@@ -359,15 +359,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Pedido_Cliente">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+  <Association Name="FK_Comprador_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Comprador" Type="Self.Comprador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comprador">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedido_Comprador">
+    <End Role="Comprador" Type="Self.Comprador" Multiplicity="1" />
     <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="IdCliente" />
+      <Principal Role="Comprador">
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Pedido">
-        <PropertyRef Name="IdCliente" />
+        <PropertyRef Name="IdComprador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -419,24 +431,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Pedido_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-    <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Pedido">
-        <PropertyRef Name="IdUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="PharmaEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Articulo" EntityType="Self.Articulo" />
     <EntitySet Name="Bodega" EntityType="Self.Bodega" />
     <EntitySet Name="Cargo" EntityType="Self.Cargo" />
     <EntitySet Name="Clasificacion" EntityType="Self.Clasificacion" />
-    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Comprador" EntityType="Self.Comprador" />
     <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
     <EntitySet Name="Empleado" EntityType="Self.Empleado" />
     <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
@@ -492,8 +492,12 @@
       <End Role="Cargo" EntitySet="Cargo" />
       <End Role="Empleado" EntitySet="Empleado" />
     </AssociationSet>
-    <AssociationSet Name="FK_Pedido_Cliente" Association="Self.FK_Pedido_Cliente">
-      <End Role="Cliente" EntitySet="Cliente" />
+    <AssociationSet Name="FK_Comprador_Usuario" Association="Self.FK_Comprador_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Comprador" EntitySet="Comprador" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedido_Comprador" Association="Self.FK_Pedido_Comprador">
+      <End Role="Comprador" EntitySet="Comprador" />
       <End Role="Pedido" EntitySet="Pedido" />
     </AssociationSet>
     <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
@@ -512,9 +516,123 @@
       <End Role="Pais" EntitySet="Pais" />
       <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
-    <AssociationSet Name="FK_Pedido_Usuario" Association="Self.FK_Pedido_Usuario">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Pedido" EntitySet="Pedido" />
-    </AssociationSet>
+    <FunctionImport Name="ActualizarCargo">
+      <Parameter Name="Tipo_Cargo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ActualizarClasificacion">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ActualizarPais">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Provincia" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ActualizarPaquete">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ActualizarTipo_Articulo">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarCargo">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarClasificacion">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPais">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarPaquete">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarTipo_Articulo">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarCargo">
+      <Parameter Name="Tipo_Cargo" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarClasificacion">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarPais">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Provincia" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="insertarPaquete">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertarTipo_Articulo">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ActualizarUsuarios">
+      <Parameter Name="pass" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="SP_BorrarUsuarios">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PharmaModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PharmaModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_InsertarUsuarios">
+      <Parameter Name="pass" Mode="In" Type="String" />
+      <Parameter Name="activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

@@ -17,10 +17,9 @@ namespace genericPharmaWebAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Articulo()
         {
-            this.Distribuye = new HashSet<Distribuye>();
             this.Traslado = new HashSet<Traslado>();
-            this.DetalleIngreso = new HashSet<DetalleIngreso>();
             this.DetallePedido = new HashSet<DetallePedido>();
+            this.Ingreso = new HashSet<Ingreso>();
         }
     
         public int ID { get; set; }
@@ -32,16 +31,19 @@ namespace genericPharmaWebAPI.Models
         public System.DateTime Vencimiento { get; set; }
         public int IdPaquete { get; set; }
         public int IdClasificacion { get; set; }
+        public Nullable<int> IdProveedor { get; set; }
+        public Nullable<decimal> PrecioCompra { get; set; }
+        public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<decimal> Impuesto { get; set; }
     
         public virtual Clasificacion Clasificacion { get; set; }
         public virtual Paquete Paquete { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Distribuye> Distribuye { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Traslado> Traslado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleIngreso> DetalleIngreso { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ingreso> Ingreso { get; set; }
     }
 }

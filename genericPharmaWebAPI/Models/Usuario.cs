@@ -17,8 +17,8 @@ namespace genericPharmaWebAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Comprador = new HashSet<Comprador>();
             this.Empleado = new HashSet<Empleado>();
-            this.Pedido = new HashSet<Pedido>();
         }
     
         public int ID { get; set; }
@@ -27,8 +27,8 @@ namespace genericPharmaWebAPI.Models
         public string Contrasena { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empleado> Empleado { get; set; }
+        public virtual ICollection<Comprador> Comprador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pedido> Pedido { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
     }
 }

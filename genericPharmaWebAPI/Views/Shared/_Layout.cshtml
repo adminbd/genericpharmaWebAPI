@@ -3,41 +3,138 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/animation")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- top-header -->
+    <div class="header-most-top">
+        <p>Tu farmacia en linea</p>
+    </div>
+    <!-- //top-header -->
+    <!-- header-bot-->
+    <div class="header-bot">
+        <div class="header-bot_inner_wthreeinfo_header_mid">
+            <!-- header-bot-->
+            <div class="col-md-4 logo_agile">
+                <h1>
+                    <a>
+                        <span>G</span>eneric
+                        <span>P</span>harma
+                        <img src="~/Content/images/logo.jpg" alt="logoFarma">
+                    </a>
+                </h1>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+            <!-- header-bot -->
+            <div class="col-md-12 col-md-12 col-xs-12 header">
+                <!-- header lists -->
+                <ul>
+                    <li>
+                        <a class="play-icon popup-with-zoom-anim">
+                            <span class="fa fa-home" aria-hidden="true"></span>
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "" })
+                        </a>
+                    </li>
+                    <li>
+                        <span class="fa fa-phone" aria-hidden="true"></span> 1800-####
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#myModal1">
+                            <span class="fa fa-unlock-alt" aria-hidden="true"></span> Iniciar sesion
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#myModal2">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Cerrar sesion
+                        </a>
+                    </li>
                 </ul>
+                <!-- //header lists -->
+                <!-- search -->
+                <div class="agileits_search">
+                    <form action="#" method="post">
+                        <input name="Search" type="search" placeholder="Que producto desea buscar?" required="">
+                        <button type="submit" class="btn btn-default" aria-label="Left Align">
+                            <span class="fa fa-search" aria-hidden="true"> </span>
+                        </button>
+                    </form>
+                </div>
+                <!-- //search -->
+                <!-- cart details -->
+                <div class="top_nav_right">
+                    <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                        <form action="/Checkout" method="post" class="last">
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="display" value="1">
+                            <a class="w3view-cart" href="/Checkout">
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+                <!-- //cart details -->
+                <div class="clearfix"></div>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
-    <div class="container body-content">
+    <!-- Modal1 -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body modal-body-sub_agile">
+                    <div class="main-mailposi">
+                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                    </div>
+                    <div class="modal_body_left modal_body_left1">
+                        <h3 class="agileinfo_sign">Iniciar sesion </h3>
+                        <p>
+                            Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                            <a href="#" data-toggle="modal" data-target="#myModal2">
+                                Sign Up Now
+                            </a>
+                        </p>
+                        <form action="#" method="post">
+                            <div class="styled-input agile-styled-input-top">
+                                <input type="text" placeholder="User Name" name="Name" required="">
+                            </div>
+                            <div class="styled-input">
+                                <input type="password" placeholder="Password" name="password" required="">
+                            </div>
+                            <input type="submit" value="Sign In">
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- //Modal content-->
+        </div>
+    </div>
+    <div class="container-fluid">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
     </div>
-
+    <!-- //footer -->
+    <!-- copyright -->
+    <div class="copy-right">
+        <div class="container">
+            <p>
+                @DateTime.Now.Year - Generic Farma Online
+            </p>
+        </div>
+    </div>
+    <!-- //copyright -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/layout")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -14,21 +14,13 @@ namespace genericPharmaWebAPI.Models
     
     public partial class Ingreso
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ingreso()
-        {
-            this.DetalleIngreso = new HashSet<DetalleIngreso>();
-        }
-    
-        public int Id { get; set; }
+        public int ID { get; set; }
+        public System.DateTime Fecha_lote { get; set; }
         public int IdProveedor { get; set; }
-        public string Tipo_Comprobante { get; set; }
-        public string Numero_Comprobante { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public Nullable<decimal> Impuesto { get; set; }
+        public int IdArticulo { get; set; }
+        public bool activo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleIngreso> DetalleIngreso { get; set; }
+        public virtual Articulo Articulo { get; set; }
         public virtual Proveedor Proveedor { get; set; }
     }
 }

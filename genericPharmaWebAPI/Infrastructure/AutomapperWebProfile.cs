@@ -32,6 +32,21 @@ namespace genericPharmaWebAPI.Infrastructure
                 .ForMember(destino => destino.Id, opt => opt.MapFrom(origen => origen.ID))
                 .ForMember(destino => destino.Descripcion, opt => opt.MapFrom(origen => origen.Descripcion))
                 .ForMember(destino => destino.Activo, opt => opt.MapFrom(origen => origen.activo));
+
+            Mapper.CreateMap<Pais, vmPais>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(origen => origen.ID))
+                .ForMember(destino => destino.Nombre, opt => opt.MapFrom(origen => origen.Nombre))
+                .ForMember(destino => destino.Provincia, opt => opt.MapFrom(origen => origen.Provincia))
+                .ForMember(destino => destino.Activo, opt => opt.MapFrom(origen => origen.activo));
+
+
+            Mapper.CreateMap<Proveedor, vmProveedor>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(origen => origen.ID))
+                .ForMember(destino => destino.Nombre, opt => opt.MapFrom(origen => origen.Nombre))
+                .ForMember(destino => destino.Direccion, opt => opt.MapFrom(origen => origen.Direccion))
+                .ForMember(destino => destino.Telefono, opt => opt.MapFrom(origen => origen.Telefono))
+                .ForMember(destino => destino.IdPais, opt => opt.MapFrom(origen => origen.IdPais))
+                .ForMember(destino => destino.Activo, opt => opt.MapFrom(origen => origen.activo));
         }
     }
 }
