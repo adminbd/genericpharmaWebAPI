@@ -19,7 +19,6 @@ namespace genericPharmaWebAPI.Models
         {
             this.Traslado = new HashSet<Traslado>();
             this.DetallePedido = new HashSet<DetallePedido>();
-            this.Ingreso = new HashSet<Ingreso>();
         }
     
         public int ID { get; set; }
@@ -31,10 +30,9 @@ namespace genericPharmaWebAPI.Models
         public System.DateTime Vencimiento { get; set; }
         public int IdPaquete { get; set; }
         public int IdClasificacion { get; set; }
-        public Nullable<int> IdProveedor { get; set; }
-        public Nullable<decimal> PrecioCompra { get; set; }
-        public Nullable<decimal> PrecioVenta { get; set; }
-        public Nullable<decimal> Impuesto { get; set; }
+        public int IdProveedor { get; set; }
+        public int PrecioCompra { get; set; }
+        public int PrecioVenta { get; set; }
     
         public virtual Clasificacion Clasificacion { get; set; }
         public virtual Paquete Paquete { get; set; }
@@ -43,7 +41,5 @@ namespace genericPharmaWebAPI.Models
         public virtual Proveedor Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingreso> Ingreso { get; set; }
     }
 }

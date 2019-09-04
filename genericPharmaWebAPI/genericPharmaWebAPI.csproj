@@ -235,9 +235,6 @@
     <Compile Include="Models\Empleado.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ingreso.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Pais.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

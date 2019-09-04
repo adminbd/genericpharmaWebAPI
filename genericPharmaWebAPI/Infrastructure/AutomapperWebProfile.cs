@@ -21,7 +21,10 @@ namespace genericPharmaWebAPI.Infrastructure
                .ForMember(destino => destino.Imagen, opt => opt.MapFrom(origen => origen.Imagen))
                .ForMember(destino => destino.Vencimiento, opt => opt.MapFrom(origen => origen.Vencimiento))
                .ForMember(destino => destino.IdPaquete, opt => opt.MapFrom(origen => origen.IdPaquete))
-               .ForMember(destino => destino.IdClasificacion, opt => opt.MapFrom(origen => origen.IdClasificacion));
+               .ForMember(destino => destino.IdClasificacion, opt => opt.MapFrom(origen => origen.IdClasificacion))
+               .ForMember(destino => destino.IdProveedor, opt => opt.MapFrom(origen => origen.IdProveedor))
+               .ForMember(destino => destino.PrecioCompra, opt => opt.MapFrom(origen => origen.PrecioCompra))
+               .ForMember(destino => destino.PrecioVenta, opt => opt.MapFrom(origen => origen.PrecioVenta));
 
             Mapper.CreateMap<Paquete, vmPaquete>()
                 .ForMember(destino => destino.Id, opt => opt.MapFrom(origen => origen.ID))

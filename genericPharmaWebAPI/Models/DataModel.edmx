@@ -18,10 +18,9 @@
           <Property Name="Vencimiento" Type="date" Nullable="false" />
           <Property Name="IdPaquete" Type="int" Nullable="false" />
           <Property Name="IdClasificacion" Type="int" Nullable="false" />
-          <Property Name="IdProveedor" Type="int" />
-          <Property Name="PrecioCompra" Type="decimal" Precision="4" Scale="2" />
-          <Property Name="PrecioVenta" Type="decimal" Precision="4" Scale="2" />
-          <Property Name="Impuesto" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+          <Property Name="PrecioCompra" Type="int" Nullable="false" />
+          <Property Name="PrecioVenta" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Bodega">
           <Key>
@@ -85,16 +84,6 @@
           <Property Name="IdCargo" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
-          <Property Name="activo" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Ingreso">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fecha_lote" Type="date" Nullable="false" />
-          <Property Name="IdProveedor" Type="int" Nullable="false" />
-          <Property Name="IdArticulo" Type="int" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pais">
@@ -331,7 +320,7 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Articulo_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -375,30 +364,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
             </Principal>
             <Dependent Role="DetallePedido">
               <PropertyRef Name="IdPedido" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingreso_Articulo">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ingreso">
-              <PropertyRef Name="IdArticulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingreso_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ingreso">
-              <PropertyRef Name="IdProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,7 +495,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <EntitySet Name="Comprador" EntityType="Self.Comprador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
@@ -623,14 +587,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
             <End Role="Pedido" EntitySet="Pedido" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ingreso_Articulo" Association="Self.FK_Ingreso_Articulo">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ingreso_Proveedor" Association="Self.FK_Ingreso_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
-          </AssociationSet>
           <AssociationSet Name="FK_Pedido_Comprador" Association="Self.FK_Pedido_Comprador">
             <End Role="Comprador" EntitySet="Comprador" />
             <End Role="Pedido" EntitySet="Pedido" />
@@ -654,16 +610,14 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdPaquete" Type="Int32" Nullable="false" />
           <Property Name="IdClasificacion" Type="Int32" Nullable="false" />
-          <Property Name="IdProveedor" Type="Int32" />
-          <Property Name="PrecioCompra" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="PrecioVenta" Type="Decimal" Precision="4" Scale="2" />
-          <Property Name="Impuesto" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+          <Property Name="PrecioCompra" Type="Int32" Nullable="false" />
+          <Property Name="PrecioVenta" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Clasificacion" Relationship="Self.FK__Articulo__IdClas__2F10007B" FromRole="Articulo" ToRole="Clasificacion" />
           <NavigationProperty Name="Paquete" Relationship="Self.FK__Articulo__IdPaqu__300424B4" FromRole="Articulo" ToRole="Paquete" />
           <NavigationProperty Name="Traslado" Relationship="Self.FK__Traslado__IdArti__38996AB5" FromRole="Articulo" ToRole="Traslado" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_Articulo_Proveedor" FromRole="Articulo" ToRole="Proveedor" />
           <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Articulo" FromRole="Articulo" ToRole="DetallePedido" />
-          <NavigationProperty Name="Ingreso" Relationship="Self.FK_Ingreso_Articulo" FromRole="Articulo" ToRole="Ingreso" />
         </EntityType>
         <EntityType Name="Bodega">
           <Key>
@@ -741,18 +695,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <NavigationProperty Name="Cargo" Relationship="Self.FK__Empleado__IdCarg__35BCFE0A" FromRole="Empleado" ToRole="Cargo" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Empleado__IdUsua__36B12243" FromRole="Empleado" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Ingreso">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fecha_lote" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdProveedor" Type="Int32" Nullable="false" />
-          <Property Name="IdArticulo" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK_Ingreso_Articulo" FromRole="Ingreso" ToRole="Articulo" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Ingreso_Proveedor" FromRole="Ingreso" ToRole="Proveedor" />
-        </EntityType>
         <EntityType Name="Pais">
           <Key>
             <PropertyRef Name="ID" />
@@ -797,7 +739,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <Property Name="IdPais" Type="Int32" Nullable="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_Proveedor" FromRole="Proveedor" ToRole="Articulo" />
-          <NavigationProperty Name="Ingreso" Relationship="Self.FK_Ingreso_Proveedor" FromRole="Proveedor" ToRole="Ingreso" />
           <NavigationProperty Name="Pais" Relationship="Self.FK__Proveedor__IdPai__37A5467C" FromRole="Proveedor" ToRole="Pais" />
         </EntityType>
         <EntityType Name="Tipo_Bodega">
@@ -917,7 +858,7 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Articulo_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -936,18 +877,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DetallePedido">
-              <PropertyRef Name="IdArticulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ingreso_Articulo">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ingreso">
               <PropertyRef Name="IdArticulo" />
             </Dependent>
           </ReferentialConstraint>
@@ -1048,18 +977,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ingreso_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Ingreso">
-              <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Proveedor__IdPai__37A5467C">
           <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -1080,7 +997,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <EntitySet Name="Comprador" EntityType="Self.Comprador" />
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" />
-          <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
           <EntitySet Name="Pais" EntityType="Self.Pais" />
           <EntitySet Name="Paquete" EntityType="Self.Paquete" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" />
@@ -1113,10 +1029,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
             <End Role="Articulo" EntitySet="Articulo" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ingreso_Articulo" Association="Self.FK_Ingreso_Articulo">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
-          </AssociationSet>
           <AssociationSet Name="FK__Bodega__IdTipo_B__31EC6D26" Association="Self.FK__Bodega__IdTipo_B__31EC6D26">
             <End Role="Tipo_Bodega" EntitySet="Tipo_Bodega" />
             <End Role="Bodega" EntitySet="Bodega" />
@@ -1148,10 +1060,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
           <AssociationSet Name="FK__Empleado__IdUsua__36B12243" Association="Self.FK__Empleado__IdUsua__36B12243">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ingreso_Proveedor" Association="Self.FK_Ingreso_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
           </AssociationSet>
           <AssociationSet Name="FK__Proveedor__IdPai__37A5467C" Association="Self.FK__Proveedor__IdPai__37A5467C">
             <End Role="Pais" EntitySet="Pais" />
@@ -1297,7 +1205,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
                 <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
-                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1367,17 +1274,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
                 <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ingreso">
-            <EntityTypeMapping TypeName="PharmaModel.Ingreso">
-              <MappingFragment StoreEntitySet="Ingreso">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Fecha_lote" ColumnName="Fecha_lote" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
               </MappingFragment>
             </EntityTypeMapping>

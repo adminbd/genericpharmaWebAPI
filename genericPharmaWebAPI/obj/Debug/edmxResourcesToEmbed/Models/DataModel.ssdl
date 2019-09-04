@@ -13,10 +13,9 @@
     <Property Name="Vencimiento" Type="date" Nullable="false" />
     <Property Name="IdPaquete" Type="int" Nullable="false" />
     <Property Name="IdClasificacion" Type="int" Nullable="false" />
-    <Property Name="IdProveedor" Type="int" />
-    <Property Name="PrecioCompra" Type="decimal" Precision="4" Scale="2" />
-    <Property Name="PrecioVenta" Type="decimal" Precision="4" Scale="2" />
-    <Property Name="Impuesto" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="IdProveedor" Type="int" Nullable="false" />
+    <Property Name="PrecioCompra" Type="int" Nullable="false" />
+    <Property Name="PrecioVenta" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Bodega">
     <Key>
@@ -80,16 +79,6 @@
     <Property Name="IdCargo" Type="int" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="IdBodega" Type="int" Nullable="false" />
-    <Property Name="activo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Ingreso">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha_lote" Type="date" Nullable="false" />
-    <Property Name="IdProveedor" Type="int" Nullable="false" />
-    <Property Name="IdArticulo" Type="int" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Pais">
@@ -326,7 +315,7 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Articulo_Proveedor">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
     <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Proveedor">
@@ -370,30 +359,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
       </Principal>
       <Dependent Role="DetallePedido">
         <PropertyRef Name="IdPedido" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ingreso_Articulo">
-    <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Ingreso">
-        <PropertyRef Name="IdArticulo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ingreso_Proveedor">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proveedor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Ingreso">
-        <PropertyRef Name="IdProveedor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -525,7 +490,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
     <EntitySet Name="Comprador" EntityType="Self.Comprador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
@@ -617,14 +581,6 @@ advertencia 6002: La tabla o vista 'Pharma.dbo.VisualizarUsuario' no tiene defin
     <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
       <End Role="Pedido" EntitySet="Pedido" />
       <End Role="DetallePedido" EntitySet="DetallePedido" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ingreso_Articulo" Association="Self.FK_Ingreso_Articulo">
-      <End Role="Articulo" EntitySet="Articulo" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ingreso_Proveedor" Association="Self.FK_Ingreso_Proveedor">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
     </AssociationSet>
     <AssociationSet Name="FK_Pedido_Comprador" Association="Self.FK_Pedido_Comprador">
       <End Role="Comprador" EntitySet="Comprador" />

@@ -34,7 +34,6 @@ namespace genericPharmaWebAPI.Models
         public virtual DbSet<Comprador> Comprador { get; set; }
         public virtual DbSet<DetallePedido> DetallePedido { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
-        public virtual DbSet<Ingreso> Ingreso { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Paquete> Paquete { get; set; }
         public virtual DbSet<Pedido> Pedido { get; set; }

@@ -8,19 +8,19 @@
     </span>
 </h3>
 <div class="content-bottom-in">
-    <div class="row allProducts">
+    <div class="row divParent">
         @foreach (var item in Model)
         {
-            <div class="itemSet">
+            <div class="divChild">
                 <div class="w3l-specilamk">
                     <div class="speioffer-agile">
-                        <a href="single.html">
+                        <a href="">
                             <img style="width:109px;height:150px" src="@Html.DisplayFor(modelItem => item.Imagen)" alt="">
                         </a>
                     </div>
                     <div class="product-name-w3l">
                         <h4>
-                            <a href="single.html">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                            <a href="">@Html.DisplayFor(modelItem => item.Nombre)</a>
                         </h4>
                         <div class="w3l-pricehkj">
                             <h6>@Html.DisplayFor(modelItem => item.PrecioVenta)C$</h6>

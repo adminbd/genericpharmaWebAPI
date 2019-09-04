@@ -13,16 +13,14 @@
     <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="IdPaquete" Type="Int32" Nullable="false" />
     <Property Name="IdClasificacion" Type="Int32" Nullable="false" />
-    <Property Name="IdProveedor" Type="Int32" />
-    <Property Name="PrecioCompra" Type="Decimal" Precision="4" Scale="2" />
-    <Property Name="PrecioVenta" Type="Decimal" Precision="4" Scale="2" />
-    <Property Name="Impuesto" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+    <Property Name="PrecioCompra" Type="Int32" Nullable="false" />
+    <Property Name="PrecioVenta" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Clasificacion" Relationship="Self.FK__Articulo__IdClas__2F10007B" FromRole="Articulo" ToRole="Clasificacion" />
     <NavigationProperty Name="Paquete" Relationship="Self.FK__Articulo__IdPaqu__300424B4" FromRole="Articulo" ToRole="Paquete" />
     <NavigationProperty Name="Traslado" Relationship="Self.FK__Traslado__IdArti__38996AB5" FromRole="Articulo" ToRole="Traslado" />
     <NavigationProperty Name="Proveedor" Relationship="Self.FK_Articulo_Proveedor" FromRole="Articulo" ToRole="Proveedor" />
     <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Articulo" FromRole="Articulo" ToRole="DetallePedido" />
-    <NavigationProperty Name="Ingreso" Relationship="Self.FK_Ingreso_Articulo" FromRole="Articulo" ToRole="Ingreso" />
   </EntityType>
   <EntityType Name="Bodega">
     <Key>
@@ -100,18 +98,6 @@
     <NavigationProperty Name="Cargo" Relationship="Self.FK__Empleado__IdCarg__35BCFE0A" FromRole="Empleado" ToRole="Cargo" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Empleado__IdUsua__36B12243" FromRole="Empleado" ToRole="Usuario" />
   </EntityType>
-  <EntityType Name="Ingreso">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha_lote" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
-    <Property Name="IdArticulo" Type="Int32" Nullable="false" />
-    <Property Name="activo" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Articulo" Relationship="Self.FK_Ingreso_Articulo" FromRole="Ingreso" ToRole="Articulo" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.FK_Ingreso_Proveedor" FromRole="Ingreso" ToRole="Proveedor" />
-  </EntityType>
   <EntityType Name="Pais">
     <Key>
       <PropertyRef Name="ID" />
@@ -156,7 +142,6 @@
     <Property Name="IdPais" Type="Int32" Nullable="false" />
     <Property Name="activo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Articulo" Relationship="Self.FK_Articulo_Proveedor" FromRole="Proveedor" ToRole="Articulo" />
-    <NavigationProperty Name="Ingreso" Relationship="Self.FK_Ingreso_Proveedor" FromRole="Proveedor" ToRole="Ingreso" />
     <NavigationProperty Name="Pais" Relationship="Self.FK__Proveedor__IdPai__37A5467C" FromRole="Proveedor" ToRole="Pais" />
   </EntityType>
   <EntityType Name="Tipo_Bodega">
@@ -276,7 +261,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Articulo_Proveedor">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
     <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Proveedor">
@@ -295,18 +280,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="DetallePedido">
-        <PropertyRef Name="IdArticulo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ingreso_Articulo">
-    <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Ingreso">
         <PropertyRef Name="IdArticulo" />
       </Dependent>
     </ReferentialConstraint>
@@ -407,18 +380,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Ingreso_Proveedor">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proveedor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Ingreso">
-        <PropertyRef Name="IdProveedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Proveedor__IdPai__37A5467C">
     <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
     <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -439,7 +400,6 @@
     <EntitySet Name="Comprador" EntityType="Self.Comprador" />
     <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
     <EntitySet Name="Empleado" EntityType="Self.Empleado" />
-    <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
     <EntitySet Name="Pais" EntityType="Self.Pais" />
     <EntitySet Name="Paquete" EntityType="Self.Paquete" />
     <EntitySet Name="Pedido" EntityType="Self.Pedido" />
@@ -472,10 +432,6 @@
       <End Role="Articulo" EntitySet="Articulo" />
       <End Role="DetallePedido" EntitySet="DetallePedido" />
     </AssociationSet>
-    <AssociationSet Name="FK_Ingreso_Articulo" Association="Self.FK_Ingreso_Articulo">
-      <End Role="Articulo" EntitySet="Articulo" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
-    </AssociationSet>
     <AssociationSet Name="FK__Bodega__IdTipo_B__31EC6D26" Association="Self.FK__Bodega__IdTipo_B__31EC6D26">
       <End Role="Tipo_Bodega" EntitySet="Tipo_Bodega" />
       <End Role="Bodega" EntitySet="Bodega" />
@@ -507,10 +463,6 @@
     <AssociationSet Name="FK__Empleado__IdUsua__36B12243" Association="Self.FK__Empleado__IdUsua__36B12243">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Empleado" EntitySet="Empleado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ingreso_Proveedor" Association="Self.FK_Ingreso_Proveedor">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
     </AssociationSet>
     <AssociationSet Name="FK__Proveedor__IdPai__37A5467C" Association="Self.FK__Proveedor__IdPai__37A5467C">
       <End Role="Pais" EntitySet="Pais" />

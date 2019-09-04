@@ -19,9 +19,8 @@ namespace genericPharmaWebAPI.ViewModels
         public System.DateTime Vencimiento { get; set; }
         public int IdPaquete { get; set; }
         public int IdClasificacion { get; set; }
-        public Nullable<int> IdProveedor { get; set; }
-        public Nullable<decimal> PrecioCompra { get; set; }
-        public Nullable<decimal> PrecioVenta { get; set; }
-        public Nullable<decimal> Impuesto { get; set; }
+        public int IdProveedor { get; set; }
+        public int PrecioCompra { get; set; }
+        public int PrecioVenta { get; set; }
     }
 }

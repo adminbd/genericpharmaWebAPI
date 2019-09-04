@@ -43,7 +43,6 @@ namespace genericPharmaWebAPI.Controllers
                     {
                         var oProveedor = new Proveedor()
                         {
-                            ID = proveedor.Id,
                             Nombre = proveedor.Nombre,
                             Direccion = proveedor.Direccion,
                             Telefono = proveedor.Telefono,

@@ -69,7 +69,9 @@ namespace genericPharmaWebAPI.Controllers
                             Vencimiento = articulo.Vencimiento,
                             IdPaquete = articulo.IdPaquete,
                             IdClasificacion = articulo.IdClasificacion,
-                            IdProveedor = articulo.IdProveedor
+                            IdProveedor = articulo.IdProveedor,
+                            PrecioCompra = articulo.PrecioCompra,
+                            PrecioVenta = articulo.PrecioVenta
                         };
                         db.Articulo.Add(oArticulo);
                         db.SaveChanges();
@@ -154,6 +156,8 @@ namespace genericPharmaWebAPI.Controllers
                         edtArticulo.IdPaquete = articulo.IdPaquete;
                         edtArticulo.IdClasificacion = articulo.IdClasificacion;
                         edtArticulo.IdProveedor = articulo.IdProveedor;
+                        edtArticulo.PrecioCompra = articulo.PrecioCompra;
+                        edtArticulo.PrecioVenta = articulo.PrecioVenta;
 
                         db.Entry(edtArticulo).State = EntityState.Modified;
                         db.SaveChanges();

@@ -16,7 +16,6 @@
           <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
           <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
           <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
-          <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -86,17 +85,6 @@
           <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Ingreso">
-      <EntityTypeMapping TypeName="PharmaModel.Ingreso">
-        <MappingFragment StoreEntitySet="Ingreso">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Fecha_lote" ColumnName="Fecha_lote" />
-          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
           <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
