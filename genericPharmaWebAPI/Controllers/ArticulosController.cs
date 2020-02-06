@@ -8,7 +8,9 @@ using genericPharmaWebAPI.Models;
 using genericPharmaWebAPI.ViewModels;
 using AutoMapper;
 using System.Data.Entity;
-using System.Web.Http.Cors;
+using System.IO;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace genericPharmaWebAPI.Controllers
 {
@@ -28,11 +30,75 @@ namespace genericPharmaWebAPI.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("api/UploadImage")]
+        public IHttpActionResult UploadImageData()
+        {
+            string obArticulo = null;
+            var httpRequest = HttpContext.Current.Request;
+            var postedFile = httpRequest.Files["file"];
+            obArticulo = httpRequest["data"];
+            var articulo = JsonConvert.DeserializeObject<vmArticulo>(obArticulo);
+            string nameImage = null;
+            try
+            {
+                if (articulo != null)
+                {
+                    if (postedFile == null)
+                    {
+                        nameImage = "no_image.png";
+                    }
+                    else
+                    {
+                        nameImage = Path.GetFileName(postedFile.FileName);
+                        var filepath = HttpContext.Current.Server.MapPath("~/Images/" + nameImage);
+                        postedFile.SaveAs(filepath);
+                    }
+
+                    using (PharmaEntities db = new PharmaEntities())
+                    {
+                        var oArticulo = new Articulo()
+                        {
+                            ID = articulo.Id,
+                            Codigo = articulo.Codigo,
+                            Nombre = articulo.Nombre,
+                            Stock = articulo.Stock,
+                            Descripcion = articulo.Descripcion,
+                            Imagen = "Images/" + nameImage,
+                            Vencimiento = articulo.Vencimiento,
+                            IdPaquete = articulo.IdPaquete,
+                            IdClasificacion = articulo.IdClasificacion,
+                            IdProveedor = articulo.IdProveedor,
+                            PrecioCompra = articulo.PrecioCompra,
+                            PrecioVenta = articulo.PrecioVenta
+                        };
+                        db.Articulo.Add(oArticulo);
+                        db.SaveChanges();
+
+                    }
+                    return Ok("success");
+                }
+                else
+                {
+                    return Ok("incomplete");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Ok("error");
+                throw e;
+            }
+        }
+
         // POST: api/Articulos
-        public IHttpActionResult Post([FromBody]vmArticulo articulo)
+        public IHttpActionResult Post([FromBody]vmMimeArticulo data)
         {
             try
             {
+                var articulo = data.articulo;
                 if (articulo != null)
                 {
                     using (PharmaEntities db = new PharmaEntities())
@@ -47,7 +113,8 @@ namespace genericPharmaWebAPI.Controllers
                             Imagen = articulo.Imagen,
                             Vencimiento = articulo.Vencimiento,
                             IdPaquete = articulo.IdPaquete,
-                            IdClasificacion = articulo.IdClasificacion
+                            IdClasificacion = articulo.IdClasificacion,
+                            IdProveedor = articulo.IdProveedor
                         };
                         db.Articulo.Add(oArticulo);
                         db.SaveChanges();
@@ -88,6 +155,9 @@ namespace genericPharmaWebAPI.Controllers
                         edtArticulo.Vencimiento = articulo.Vencimiento;
                         edtArticulo.IdPaquete = articulo.IdPaquete;
                         edtArticulo.IdClasificacion = articulo.IdClasificacion;
+                        edtArticulo.IdProveedor = articulo.IdProveedor;
+                        edtArticulo.PrecioCompra = articulo.PrecioCompra;
+                        edtArticulo.PrecioVenta = articulo.PrecioVenta;
 
                         db.Entry(edtArticulo).State = EntityState.Modified;
                         db.SaveChanges();

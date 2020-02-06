@@ -17,8 +17,7 @@ namespace genericPharmaWebAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
-            this.Distribuye = new HashSet<Distribuye>();
-            this.Ingreso = new HashSet<Ingreso>();
+            this.Articulo = new HashSet<Articulo>();
         }
     
         public int ID { get; set; }
@@ -29,9 +28,7 @@ namespace genericPharmaWebAPI.Models
         public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Distribuye> Distribuye { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ingreso> Ingreso { get; set; }
+        public virtual ICollection<Articulo> Articulo { get; set; }
         public virtual Pais Pais { get; set; }
     }
 }

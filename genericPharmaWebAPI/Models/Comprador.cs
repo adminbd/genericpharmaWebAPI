@@ -12,23 +12,23 @@ namespace genericPharmaWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ingreso
+    public partial class Comprador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ingreso()
+        public Comprador()
         {
-            this.DetalleIngreso = new HashSet<DetalleIngreso>();
+            this.Pedido = new HashSet<Pedido>();
         }
     
         public int Id { get; set; }
-        public int IdProveedor { get; set; }
-        public string Tipo_Comprobante { get; set; }
-        public string Numero_Comprobante { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public Nullable<decimal> Impuesto { get; set; }
+        public int IdUsuario { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
     
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleIngreso> DetalleIngreso { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        public virtual ICollection<Pedido> Pedido { get; set; }
     }
 }

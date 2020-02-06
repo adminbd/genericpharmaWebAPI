@@ -21,17 +21,15 @@ namespace genericPharmaWebAPI.Models
         }
     
         public int Id { get; set; }
-        public int IdCliente { get; set; }
-        public int IdUsuario { get; set; }
         public string NumeroPedido { get; set; }
         public System.DateTime FechaHora { get; set; }
         public Nullable<decimal> Impuesto { get; set; }
         public decimal TotalPedido { get; set; }
         public string Estado { get; set; }
+        public int IdComprador { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
+        public virtual Comprador Comprador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

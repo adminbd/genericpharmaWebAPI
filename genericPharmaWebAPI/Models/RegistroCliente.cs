@@ -12,21 +12,9 @@ namespace genericPharmaWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cliente
+    public partial class RegistroCliente
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cliente()
-        {
-            this.Pedido = new HashSet<Pedido>();
-        }
-    
-        public int IdCliente { get; set; }
-        public string Nombre { get; set; }
         public string Cedula { get; set; }
         public string Direccion { get; set; }
-        public string Correo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pedido> Pedido { get; set; }
     }
 }

@@ -1,0 +1,107 @@
+﻿.cielo
+{
+    height: 57vh;
+    width: 100%;
+    background-image: url(../images/sky.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow-x: hidden;
+
+}
+.autopista
+{
+    height: 200px;
+    width: 500%;
+    display: block;
+    background-image: url(../images/road.jpg);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: autopista 8s linear infinite;
+}
+@keyframes autopista
+{
+    100%{
+        transform: translateX(-3400px);
+    }
+}
+.ciudad
+{
+    height: 250px;
+    width: 500%;
+    background-image: url(../images/city.png);
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: ciudad 20s linear infinite;
+}
+@keyframes ciudad
+{
+     100%{
+         transform: translateX(-1400px);
+     }
+}
+.auto
+{
+    width: 400px;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 2;
+}
+.auto img
+{
+    width: 100%;
+    animation: auto 1s linear infinite;
+}
+@keyframes auto
+{
+    100%{
+        transform: translateY(-1px);
+    }
+    50%{
+        transform: translateY(1px);
+    }
+    0%{
+        transform: translateY(-1px);
+    }
+}
+.ruedas
+{
+    left:50%;
+    bottom: 178px;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 2;
+}
+.ruedas img
+{
+    width: 72px;
+    height: 72px;
+    animation: ruedas 1s linear infinite;
+}
+.atras-ruedas
+{
+    left: -165px;
+    position: absolute;
+}
+.adelante-ruedas
+{
+    left: 80px;
+    position: absolute;
+}
+@keyframes ruedas
+{
+    100%{
+        transform: rotate(360deg);
+    }
+}

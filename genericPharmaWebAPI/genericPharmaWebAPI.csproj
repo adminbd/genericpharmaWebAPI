@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Items\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -188,9 +189,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ClasificacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,7 +211,7 @@
     <Compile Include="Models\Clasificacion.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cliente.cs">
+    <Compile Include="Models\Comprador.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModel.Context.cs">
@@ -225,19 +229,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleIngreso.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DetallePedido.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Distribuye.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Empleado.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ingreso.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pais.cs">
@@ -252,7 +247,19 @@
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\RegistroArticulo.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistroCliente.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistroProveedor.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tipo_Bodega.cs">
@@ -264,18 +271,130 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VisualizarEmpleados.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VisualizarUsuario.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\vmArticulo.cs" />
     <Compile Include="ViewModels\vmClasificacion.cs" />
+    <Compile Include="ViewModels\vmMimeArticulo.cs" />
+    <Compile Include="ViewModels\vmPais.cs" />
     <Compile Include="ViewModels\vmPaquete.cs" />
+    <Compile Include="ViewModels\vmProveedor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\animation\motioncar.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\creditly.css" />
+    <Content Include="Content\css\easy-responsive-tabs.css" />
+    <Content Include="Content\css\flexslider.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\jquery-ui1.css" />
+    <Content Include="Content\css\popuo-box.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\1.png" />
+    <Content Include="Content\images\2.png" />
+    <Content Include="Content\images\a1.jpg" />
+    <Content Include="Content\images\a10.jpg" />
+    <Content Include="Content\images\a11.jpg" />
+    <Content Include="Content\images\a12.jpg" />
+    <Content Include="Content\images\a2.jpg" />
+    <Content Include="Content\images\a3.jpg" />
+    <Content Include="Content\images\a4.jpg" />
+    <Content Include="Content\images\a5.jpg" />
+    <Content Include="Content\images\a6.jpg" />
+    <Content Include="Content\images\a7.jpg" />
+    <Content Include="Content\images\a8.jpg" />
+    <Content Include="Content\images\a9.jpg" />
+    <Content Include="Content\images\about.jpg" />
+    <Content Include="Content\images\about2.jpg" />
+    <Content Include="Content\images\arrow.png" />
+    <Content Include="Content\images\banner1.jpg" />
+    <Content Include="Content\images\banner2.jpg" />
+    <Content Include="Content\images\banner3.jpg" />
+    <Content Include="Content\images\banner4.jpg" />
+    <Content Include="Content\images\bg1.jpg" />
+    <Content Include="Content\images\car.png" />
+    <Content Include="Content\images\city.png" />
+    <Content Include="Content\images\close_1.png" />
+    <Content Include="Content\images\contact2.jpg" />
+    <Content Include="Content\images\d1.jpg" />
+    <Content Include="Content\images\d2.jpg" />
+    <Content Include="Content\images\d3.jpg" />
+    <Content Include="Content\images\d4.jpg" />
+    <Content Include="Content\images\d5.jpg" />
+    <Content Include="Content\images\k1.jpg" />
+    <Content Include="Content\images\k10.jpg" />
+    <Content Include="Content\images\k11.jpg" />
+    <Content Include="Content\images\k12.jpg" />
+    <Content Include="Content\images\k2.jpg" />
+    <Content Include="Content\images\k3.jpg" />
+    <Content Include="Content\images\k4.jpg" />
+    <Content Include="Content\images\k5.jpg" />
+    <Content Include="Content\images\k6.jpg" />
+    <Content Include="Content\images\k7.jpg" />
+    <Content Include="Content\images\k8.jpg" />
+    <Content Include="Content\images\k9.jpg" />
+    <Content Include="Content\images\left.png" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\m1.jpg" />
+    <Content Include="Content\images\m2.jpg" />
+    <Content Include="Content\images\m3.jpg" />
+    <Content Include="Content\images\mk4.jpg" />
+    <Content Include="Content\images\mk5.jpg" />
+    <Content Include="Content\images\mk6.jpg" />
+    <Content Include="Content\images\mk7.jpg" />
+    <Content Include="Content\images\mk8.jpg" />
+    <Content Include="Content\images\mk9.jpg" />
+    <Content Include="Content\images\move-up.png" />
+    <Content Include="Content\images\nav.png" />
+    <Content Include="Content\images\nut1.png" />
+    <Content Include="Content\images\pay1.png" />
+    <Content Include="Content\images\pay2.png" />
+    <Content Include="Content\images\pay3.png" />
+    <Content Include="Content\images\pay4.png" />
+    <Content Include="Content\images\pay5.png" />
+    <Content Include="Content\images\pay6.png" />
+    <Content Include="Content\images\pay7.png" />
+    <Content Include="Content\images\pay8.png" />
+    <Content Include="Content\images\pay9.png" />
+    <Content Include="Content\images\paypal.png" />
+    <Content Include="Content\images\right.png" />
+    <Content Include="Content\images\road.jpg" />
+    <Content Include="Content\images\s1.jpg" />
+    <Content Include="Content\images\s2.jpg" />
+    <Content Include="Content\images\s3.jpg" />
+    <Content Include="Content\images\s4.jpg" />
+    <Content Include="Content\images\s5.jpg" />
+    <Content Include="Content\images\s6.jpg" />
+    <Content Include="Content\images\s7.jpg" />
+    <Content Include="Content\images\s8.jpg" />
+    <Content Include="Content\images\s9.jpg" />
+    <Content Include="Content\images\se1.jpg" />
+    <Content Include="Content\images\se2.jpg" />
+    <Content Include="Content\images\se3.jpg" />
+    <Content Include="Content\images\search.png" />
+    <Content Include="Content\images\si.jpg" />
+    <Content Include="Content\images\si2.jpg" />
+    <Content Include="Content\images\si3.jpg" />
+    <Content Include="Content\images\sky.jpg" />
+    <Content Include="Content\images\star1.png" />
+    <Content Include="Content\images\star22.png" />
+    <Content Include="Content\images\tab3.png" />
+    <Content Include="Content\images\videoimg2.png" />
+    <Content Include="Content\images\wheel.png" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\no_image.png" />
     <Content Include="Models\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataModel.edmx</DependentUpon>
@@ -307,6 +426,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <EntityDeploy Include="Models\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
@@ -317,6 +442,20 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\js\bootstrap.js" />
+    <Content Include="Scripts\js\creditly.js" />
+    <Content Include="Scripts\js\easing.js" />
+    <Content Include="Scripts\js\easyResponsiveTabs.js" />
+    <Content Include="Scripts\js\imagezoom.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\js\jquery-ui.js" />
+    <Content Include="Scripts\js\jquery.flexisel.js" />
+    <Content Include="Scripts\js\jquery.flexslider.js" />
+    <Content Include="Scripts\js\jquery.magnific-popup.js" />
+    <Content Include="Scripts\js\minicart.js" />
+    <Content Include="Scripts\js\move-top.js" />
+    <Content Include="Scripts\js\SmoothScroll.min.js" />
+    <Content Include="Scripts\mainLayout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -335,6 +474,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\_ProductsPartial.cshtml" />
+    <Content Include="Views\Shared\_BannerPartial.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Home\_ListProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

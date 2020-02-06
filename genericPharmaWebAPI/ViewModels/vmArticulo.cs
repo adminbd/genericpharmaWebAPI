@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using genericPharmaWebAPI.Models;
+using genericPharmaWebAPI.ViewModels;
+using AutoMapper;
 
 namespace genericPharmaWebAPI.ViewModels
 {
@@ -13,9 +16,11 @@ namespace genericPharmaWebAPI.ViewModels
         public int Stock { get; set; }
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
-        public DateTime Vencimiento { get; set; }
+        public System.DateTime Vencimiento { get; set; }
         public int IdPaquete { get; set; }
         public int IdClasificacion { get; set; }
-        public HttpPostedFileBase FormData { get; set; }
+        public int IdProveedor { get; set; }
+        public int PrecioCompra { get; set; }
+        public int PrecioVenta { get; set; }
     }
 }

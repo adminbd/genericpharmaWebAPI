@@ -10,18 +10,10 @@
 namespace genericPharmaWebAPI.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DetalleIngreso
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int Id { get; set; }
-        public int IdIngreso { get; set; }
-        public int IdArticulo { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> PrecioCompra { get; set; }
-        public Nullable<decimal> PrecioVenta { get; set; }
-    
-        public virtual Articulo Articulo { get; set; }
-        public virtual Ingreso Ingreso { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

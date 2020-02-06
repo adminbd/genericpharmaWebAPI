@@ -12,15 +12,11 @@ namespace genericPharmaWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Distribuye
+    public partial class VisualizarEmpleados
     {
-        public int ID { get; set; }
-        public System.DateTime Fecha_lote { get; set; }
-        public int IdProveedor { get; set; }
-        public int IdArticulo { get; set; }
-        public bool activo { get; set; }
-    
-        public virtual Articulo Articulo { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        public string NI { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Direccion { get; set; }
     }
 }
